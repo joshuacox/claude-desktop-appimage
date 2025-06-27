@@ -9,44 +9,21 @@ env:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    container:
+      options: --user 1001
     steps:
       - name: Checkout repository
         id: checkoutrepo
         uses: actions/checkout@v4
-      - name: mkdir output
-        run: mkdir output
       - name: builder
         id: builder
-        uses: joshuacox/claude-desktop-appimage@v0.0.13
-      - name: debbuilder
-        id: debbuilder
-        uses: joshuacox/claude-desktop-appimage@v0.0.13
-        with: 
-          build-arg: 'deb'
+        uses: joshuacox/claude-desktop-appimage@v0.0.4
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
-      - name: upload appimage 
-        id: apparchiver
+      - name: Archive code coverage results
+        id: archiver
         uses: actions/upload-artifact@v4
         with:
           name: claude-desktop
-          path: output/claude-desktop-0.11.3-amd64.AppImage
-      - name: upload deb
-        id: debarchiver
-        uses: actions/upload-artifact@v4
-        with:
-          name: claude-desktop
-          path: output/claude-desktop_0.11.3_amd64.deb
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v0.0.13
-          name: Release v0.0.13
-          body: |
-            This is the appimage and deb made from this builder.
-          draft: false
-          prerelease: false
-          files: |
-            output/claude-desktop-0.11.3-amd64.AppImage
-            output/claude-desktop_0.11.3_amd64.deb
+          path: output/claude-desktop-0.11.3-arm64.AppImage
+      # Use the output from the `builder` step
