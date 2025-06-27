@@ -13,27 +13,25 @@ jobs:
         with:
           build-flags: '--build appimage --clean yes'
       # Use the output from the `hello` step
-      - name: Get the output time
+      - name: Get the build time
         run: echo "The time to build was ${{ steps.hello.outputs.time }}"
   build_and_test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
+        id: checkoutrepo
         uses: actions/checkout@v4
-      - name: npm install, build, and test
-        run: |
-          pnpm install
-          pnpm run build --if-present
-          pnpm test
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+      - name: builder
+        id: builder
+        uses: joshuacox/claude-desktop-appimage@v0.0.1
         with:
-          name: dist-without-markdown
-          path: |
-            dist
-            !dist/**/*.md
+          build-flags: '--build appimage --clean yes'
+      - name: Get the build time
+        run: echo "The time to build was ${{ steps.builder.outputs.time }}"
       - name: Archive code coverage results
+        id: archiver
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
-          path: output/test/code-coverage.html
+          name: claude-desktop
+          path: output/claude-desktop-0.11.3-arm64.AppImage
+      # Use the output from the `builder` step
