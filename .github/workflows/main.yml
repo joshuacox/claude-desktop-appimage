@@ -17,7 +17,7 @@ jobs:
         id: builder
         uses: joshuacox/claude-desktop-appimage@v0.0.1
         with:
-          build-flags: ' '
+          build-flags: ''
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
       - name: Archive code coverage results
