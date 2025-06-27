@@ -1,6 +1,11 @@
 # action.yml
 name: 'Build Claud Desktop'
 description: 'build an appimage for Claude Desktop'
+inputs:
+  build-args:
+    description: 'args for builder'
+    required: false
+    default: '--build appimage --clean yes'
 outputs:
   time: # id of output
     description: 'The time it took to build'
