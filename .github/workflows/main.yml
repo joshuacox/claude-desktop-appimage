@@ -17,10 +17,10 @@ jobs:
         run: mkdir output
       - name: builder
         id: builder
-        uses: joshuacox/claude-desktop-appimage@v0.0.10
+        uses: joshuacox/claude-desktop-appimage@v0.0.11
       - name: debbuilder
         id: debbuilder
-        uses: joshuacox/claude-desktop-appimage@v0.0.10
+        uses: joshuacox/claude-desktop-appimage@v0.0.11
         with: 
           build-arg: 'deb'
       - name: Get the build time
@@ -35,8 +35,8 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v0.0.10
-          name: Release v0.0.10
+          tag_name: v0.0.11
+          name: Release v0.0.11
           body: |
             This is the appimage made from this builder.
           draft: false
