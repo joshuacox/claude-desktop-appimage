@@ -17,29 +17,36 @@ jobs:
         run: mkdir output
       - name: builder
         id: builder
-        uses: joshuacox/claude-desktop-appimage@v0.0.11
+        uses: joshuacox/claude-desktop-appimage@v0.0.12
       - name: debbuilder
         id: debbuilder
-        uses: joshuacox/claude-desktop-appimage@v0.0.11
+        uses: joshuacox/claude-desktop-appimage@v0.0.12
         with: 
           build-arg: 'deb'
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
-      - name: Archive code coverage results
+      - name: upload appimage 
         id: archiver
         uses: actions/upload-artifact@v4
         with:
           name: claude-desktop
           path: output/claude-desktop-0.11.3-amd64.AppImage
+      - name: upload deb
+        id: archiver
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-desktop
+          path: output/claude-desktop_0.11.3_amd64.deb
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v0.0.11
-          name: Release v0.0.11
+          tag_name: v0.0.12
+          name: Release v0.0.12
           body: |
-            This is the appimage made from this builder.
+            This is the appimage and deb made from this builder.
           draft: false
           prerelease: false
           files: |
             output/claude-desktop-0.11.3-amd64.AppImage
+            output/claude-desktop_0.11.3_amd64.deb
