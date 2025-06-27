@@ -18,25 +18,41 @@ jobs:
       - name: builder
         id: builder
         uses: joshuacox/claude-desktop-appimage@v0.11.3
+        with: 
+          platforms: linux/amd64,linux/arm64
+          build-arg: 'appimage'
       - name: debbuilder
         id: debbuilder
         uses: joshuacox/claude-desktop-appimage@v0.11.3
         with: 
+          platforms: linux/amd64,linux/arm64
           build-arg: 'deb'
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
-      - name: upload appimage 
-        id: apparchiver
+      - name: upload appimage amd64
+        id: apparchiveramd64
         uses: actions/upload-artifact@v4
         with:
           name: claude-desktop-appimage
           path: output/claude-desktop-0.11.3-amd64.AppImage
-      - name: upload deb
-        id: debarchiver
+      - name: upload deb amd64
+        id: debarchiveramd64
         uses: actions/upload-artifact@v4
         with:
           name: claude-desktop-deb
           path: output/claude-desktop_0.11.3_amd64.deb
+      - name: upload appimage arm64
+        id: apparchiverarm64
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-desktop-appimage
+          path: output/claude-desktop-0.11.3-arm64.AppImage
+      - name: upload deb arm64
+        id: debarchiverarm64
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-desktop-deb
+          path: output/claude-desktop_0.11.3_arm64.deb
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -50,3 +66,5 @@ jobs:
           files: |
             output/claude-desktop-0.11.3-amd64.AppImage
             output/claude-desktop_0.11.3_amd64.deb
+            output/claude-desktop-0.11.3-arm64.AppImage
+            output/claude-desktop_0.11.3_arm64.deb
