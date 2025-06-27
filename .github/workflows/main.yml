@@ -2,6 +2,10 @@ name: ReactFoundations
 
 on: [push]
 
+env:
+  APPIMAGE_EXTRACT_AND_RUN: 1
+  BUILT_IN_DOCKER: 1
+
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
