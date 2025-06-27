@@ -22,7 +22,7 @@ USER builder
 # Use bash for the shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Create a script file sourced by both interactive and non-interactive bash shells
-ENV BASH_ENV=/home/builder/.bash_env
+ENV BASH_ENV=/github/workspace/.bash_env
 RUN touch "${BASH_ENV}"
 RUN echo '. "${BASH_ENV}"' >> ~/.bashrc
 RUN echo 'export APPIMAGE_EXTRACT_AND_RUN=1' >> ~/.bashrc
@@ -36,11 +36,11 @@ RUN npm install --no-save electron @electron/asar
 
 # Final entrypoint to let the other flags work by overriding CMD
 CMD [ "--build", "appimage", "--clean", "yes" ]
-ENTRYPOINT [ "/home/builder/build.sh" ]
+ENTRYPOINT [ "/github/workspace/build.sh" ]
 
 USER root
 # Add the build scripts
-ADD ./build.sh /home/builder/build.sh
-ADD ./scripts /home/builder/scripts
-RUN chown -R builder: /home/builder
+ADD ./build.sh /github/workspace/build.sh
+ADD ./scripts /github/workspace/scripts
+RUN chown -R builder: /github/workspace
 USER builder
