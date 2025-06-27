@@ -11,7 +11,7 @@ apt-get install -yqq --no-install-recommends \
   libfuse-dev icoutils imagemagick nodejs npm dpkg-dev \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
-&& useradd -m -d /github/workspace -s /bin/bash builder \
+&& useradd -m -d /github/workspace -u 1001 -s /bin/bash builder \
 && echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
 && chmod 0440 /etc/sudoers
 
