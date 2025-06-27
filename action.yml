@@ -2,10 +2,10 @@
 name: 'Build Claud Desktop'
 description: 'build an appimage for Claude Desktop'
 inputs:
-  build-args:
-    description: 'args for builder'
+  build-arg:
+    description: 'arg for builder'
     required: false
-    default: '--build appimage --clean yes'
+    default: 'appimage'
 outputs:
   time: # id of output
     description: 'The time it took to build'
@@ -13,4 +13,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - --build
     - ${{ inputs.build-args }}
+    - --clean
+    - yes
