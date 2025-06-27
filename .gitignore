@@ -1,6 +1,7 @@
 # Build output
 build/
 build_*/
+output/
 
 # Dev folder
 .dev/
@@ -18,3 +19,6 @@ Thumbs.db
 *.AppImage
 *.desktop
 *.deb
+*.orig
+*.log
+log

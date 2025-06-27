@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 # Arguments passed from the main script
 VERSION="$1"
@@ -274,7 +274,14 @@ OUTPUT_PATH="$WORK_DIR/$OUTPUT_FILENAME"
 # Export ARCH instead of using env
 export ARCH="$ARCHITECTURE"
 echo "Using ARCH=$ARCH" # Debug output
-if "$APPIMAGETOOL_PATH" "$APPDIR_PATH" "$OUTPUT_PATH"; then
+#echo "APPIMAGETOOL_PATH" "APPDIR_PATH" "OUTPUT_PATH"
+#echo "$APPIMAGETOOL_PATH" "$APPDIR_PATH" "$OUTPUT_PATH"
+#ls -alh "$APPIMAGETOOL_PATH" "$APPDIR_PATH" "$OUTPUT_PATH"
+#ls -alh "$APPIMAGETOOL_PATH"
+#ls -alh "$APPDIR_PATH"
+#"$APPIMAGETOOL_PATH" -h
+#ls -alh "$OUTPUT_PATH"
+if "$APPIMAGETOOL_PATH" --appimage-extract-and-run "$APPDIR_PATH" "$OUTPUT_PATH"; then
     echo "✓ AppImage built successfully: $OUTPUT_PATH"
 else
     echo "❌ Failed to build AppImage using $APPIMAGETOOL_PATH"

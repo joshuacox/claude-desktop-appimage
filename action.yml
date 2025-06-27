@@ -1,0 +1,17 @@
+# action.yml
+name: 'Build Claud Desktop'
+description: 'build an appimage for Claude Desktop'
+inputs:
+ build-flags:  # id of input
+    description: 'default build flags'
+    required: true
+    default: '--build appimage --clean yes'
+outputs:
+  time: # id of output
+    description: 'The time it took to build'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.build-flags }}
+
