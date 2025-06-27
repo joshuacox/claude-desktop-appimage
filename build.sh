@@ -202,6 +202,9 @@ if [ -n "$DEPS_TO_INSTALL" ]; then
     echo "✓ System dependencies installed successfully via sudo."
 fi
 
+ls -alh /github
+ls -alh /github/workspace
+ls -alh /github/workspace/build
 rm -rf "$WORK_DIR"
 mkdir -p "$WORK_DIR"
 mkdir -p "$APP_STAGING_DIR" 
