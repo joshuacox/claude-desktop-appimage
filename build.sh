@@ -1,4 +1,6 @@
 #!/bin/bash
+ARM64_EXPECTED_HASH="ad9a8bb5bf985245d1f592ef1591e32a8644d329c9aeb347b116d3650a9317a0"
+AMD64_EXPECTED_HASH="79891e59e6c47bca913b91a7cfa2b92f83a1ebb17a6203b920183ec411f6d316"
 set -euo pipefail
 
 # --- Architecture Detection ---
@@ -277,9 +279,9 @@ echo "✓ Download complete: $CLAUDE_EXE_FILENAME"
 
 echo "🔐 Verifying SHA256 checksum..."
 if [ "$ARCHITECTURE" = "amd64" ]; then
-    EXPECTED_HASH="79891e59e6c47bca913b91a7cfa2b92f83a1ebb17a6203b920183ec411f6d316"
+    EXPECTED_HASH=${AMD64_EXPECTED_HASH}
 elif [ "$ARCHITECTURE" = "arm64" ]; then
-    EXPECTED_HASH="ddb162bb7e6c6ab29bc18d5effa304c2b1d613104c01ef868942d56572210350"
+    EXPECTED_HASH=${ARM64_EXPECTED_HASH}
 else
     echo "Unknown architecture: $ARCHITECTURE"
     exit 1
