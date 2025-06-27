@@ -1,14 +1,15 @@
-FROM debian:trixie
+FROM debian:bookworm
 # Env vars
 ENV APPIMAGE_EXTRACT_AND_RUN=1
 ENV BUILT_IN_DOCKER=1
 
+  #libfuse-dev icoutils imagemagick nodejs npm dpkg-dev \
 # Install and prep
 RUN apt-get update \ 
 && DEBIAN_FRONTEND=noninteractive \
 apt-get install -yqq --no-install-recommends \
   file build-essential sudo curl p7zip-full wget \
-  libfuse-dev icoutils imagemagick nodejs npm dpkg-dev \
+  icoutils imagemagick nodejs npm dpkg-dev \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* \
 && useradd -m -s /bin/bash builder \
