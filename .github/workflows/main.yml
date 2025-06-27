@@ -25,5 +25,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: claude-desktop
-          path: output/claude-desktop-0.11.3-arm64.AppImage
+          path: output/claude-desktop-0.11.3-amd64.AppImage
       # Use the output from the `builder` step
