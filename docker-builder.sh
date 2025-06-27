@@ -1,5 +1,5 @@
 #!/bin/sh
-: ${GITHUB_OUTPUT:=$(mktemp --suffix=.builder.log)}
+: "${GITHUB_OUTPUT:=$(mktemp --suffix=.builder.log)}"
 time1=$(date +%s.%N)
 
 set -eux
@@ -14,4 +14,4 @@ docker run \
 
 time2=$(date +%s.%N)
 diff=$(echo "scale=40;${time2} - ${time1}" | bc)
-echo "time=$diff" >> $GITHUB_OUTPUT
+echo "time=$diff" >> "$GITHUB_OUTPUT"

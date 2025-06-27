@@ -541,6 +541,6 @@ fi
 echo -e "\033[1;34m======================\033[0m"
 
 if [ "$BUILT_IN_DOCKER" = 1 ]; then
-  mv -v $FINAL_OUTPUT_PATH ./output/
+  mv -v "$FINAL_OUTPUT_PATH" ./output/
 fi
 exit 0
