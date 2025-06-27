@@ -202,10 +202,13 @@ if [ -n "$DEPS_TO_INSTALL" ]; then
     echo "✓ System dependencies installed successfully via sudo."
 fi
 
+echo ls section
 ls -alh /github
 ls -alh /github/workspace
 ls -alh /github/workspace/build
+echo rm section
 rm -rf "$WORK_DIR"
+echo mkdir section
 mkdir -p "$WORK_DIR"
 mkdir -p "$APP_STAGING_DIR" 
 echo -e "\033[1;36m--- Electron & Asar Handling ---\033[0m"
