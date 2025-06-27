@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
       - name: builder
         id: builder
-        uses: joshuacox/claude-desktop-appimage@v0.0.1
+        uses: joshuacox/claude-desktop-appimage@v0.0.3
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
       - name: Archive code coverage results
