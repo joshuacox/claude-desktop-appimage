@@ -205,7 +205,7 @@ fi
 echo ls section
 ls -alh /github
 ls -alh /github/workspace
-ls -alh /github/workspace/build
+id -u
 echo rm section
 rm -rf "$WORK_DIR"
 echo mkdir section
