@@ -19,13 +19,11 @@ jobs:
         id: builder
         uses: joshuacox/claude-desktop-appimage@v0.11.3
         with: 
-          platforms: linux/amd64,linux/arm64
           build-arg: 'appimage'
       - name: debbuilder
         id: debbuilder
         uses: joshuacox/claude-desktop-appimage@v0.11.3
         with: 
-          platforms: linux/amd64,linux/arm64
           build-arg: 'deb'
       - name: Get the build time
         run: echo "The time to build was ${{ steps.builder.outputs.time }}"
@@ -41,6 +39,39 @@ jobs:
         with:
           name: claude-desktop-deb
           path: output/claude-desktop_0.11.3_amd64.deb
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v0.11.3
+          name: Release v0.11.3
+          body: |
+            This is the appimage and deb made from this builder.
+          draft: false
+          prerelease: false
+          files: |
+            output/claude-desktop-0.11.3-amd64.AppImage
+            output/claude-desktop_0.11.3_amd64.deb
+  build_and_test_arm:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout repository
+        id: checkoutrepo
+        uses: actions/checkout@v4
+      - name: mkdir output
+        run: mkdir output
+      - name: builder
+        id: builder
+        uses: joshuacox/claude-desktop-appimage@v0.11.3
+        with: 
+          build-arg: 'appimage'
+      - name: debbuilder
+        id: debbuilder
+        uses: joshuacox/claude-desktop-appimage@v0.11.3
+        with: 
+          build-arg: 'deb'
+      - name: Get the build time
+        run: echo "The time to build was ${{ steps.builder.outputs.time }}"
       - name: upload appimage arm64
         id: apparchiverarm64
         uses: actions/upload-artifact@v4
@@ -64,7 +95,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            output/claude-desktop-0.11.3-amd64.AppImage
-            output/claude-desktop_0.11.3_amd64.deb
             output/claude-desktop-0.11.3-arm64.AppImage
             output/claude-desktop_0.11.3_arm64.deb
