@@ -7,18 +7,6 @@ env:
   BUILT_IN_DOCKER: 1
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
-    name: A job to say hello
-    steps:
-      - name: Hello world action step
-        id: hello
-        uses: joshuacox/claude-desktop-appimage@v1
-        with:
-          build-flags: '--build appimage --clean yes'
-      # Use the output from the `hello` step
-      - name: Get the build time
-        run: echo "The time to build was ${{ steps.hello.outputs.time }}"
   build_and_test:
     runs-on: ubuntu-latest
     steps:

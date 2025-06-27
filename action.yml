@@ -5,7 +5,8 @@ inputs:
  build-flags:  # id of input
     description: 'default build flags'
     required: true
-    default: '--build appimage --clean yes'
+    #default: '--build appimage --clean yes'
+    default: ' '
 outputs:
   time: # id of output
     description: 'The time it took to build'
