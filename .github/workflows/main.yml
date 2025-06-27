@@ -9,6 +9,8 @@ env:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    container:
+      options:  --user 1001
     steps:
       - name: Checkout repository
         id: checkoutrepo
