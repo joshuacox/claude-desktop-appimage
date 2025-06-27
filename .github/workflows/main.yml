@@ -13,6 +13,8 @@ jobs:
       - name: Checkout repository
         id: checkoutrepo
         uses: actions/checkout@v4
+      - name: mkdir output
+        run: mkdir output
       - name: builder
         id: builder
         uses: joshuacox/claude-desktop-appimage@v0.0.6
